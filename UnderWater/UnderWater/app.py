@@ -10,7 +10,7 @@ from io import BytesIO
 from PIL import Image
 import tempfile
 from werkzeug.utils import secure_filename
-import pygame
+
 import json
 import datetime
 import threading
@@ -370,8 +370,9 @@ except Exception as e:
 
 # Initialize pygame mixer for alarm sound
 try:
-    pygame.mixer.init(frequency=22050, size=-16, channels=2, buffer=512)
-    
+   # Audio is disabled on cloud hosting
+    alarm_sound = None
+    logging.info("Alarm sound disabled for cloud deployment")
     # Generate a simple alarm sound programmatically
     def generate_alarm_sound():
         sample_rate = 22050
